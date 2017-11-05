@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>iFamily</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<style>
+		div {
+			height: 550px;
+			border: 1px solid black;
+		}
+		</style>
+		<!-- inject:css -->
+		<link rel="stylesheet" href="css/cocoen.css">
+		<!-- endinject -->
+	</head>
+	<body>
+		<div id="lol" class="container" width = 1200>
+			<div class="cocoen"
+				 onclick="getResult(event)" 
+				 onmouseout="clearCoor()">
+				<img src="Resource/Happy.jpg" alt="">
+				<img src="Resource/s002.jpeg" alt="">
+			</div>
+		</div>
+
+		<div class="popup" >
+		  <span class="popuptext" onclick="closePopup()" id="myPopup">Popup text...</span>
+		</div>
+
+		<!-- inject:js -->
+		<script src="js/vendor/jquery.min.js"></script>
+		<script src="js/vendor/requestAnimationFrame.min.js"></script>
+		<script src="js/cocoen.js"></script>
+		<!-- endinject -->
+		<script>
+			$(function(){
+				$('.cocoen').cocoen();
+			});
+			<!-- document.getElementById("lol").onmousedown = function() {mouseDown()}; -->
+			
+			<!-- function mouseDown() { -->
+				<!-- alert("Lol"); -->
+			<!-- } -->
+
+			function showCoords(event) {
+				var x = event.clientX;
+				var happiness = (x/1200)*100;
+				var sadness = 100 - happiness;
+				var coor = "Happiness: " + happiness.toFixed(2) + ", Sadness: " + sadness.toFixed(2);
+				document.getElementById("rate").innerHTML = coor;
+			}
+
+			function clearCoor() {
+				document.getElementById("rate").innerHTML = "Please rate your marriage";
+			}
+			
+			function getResult(event) {
+				var popup = document.getElementById("myPopup");
+				var x = event.clientX;
+				popup.innerHTML = getMessage(x);
+				popup.classList.toggle("show");
+			}
+			
+			function closePopup() {
+				location.reload();
+			}
+			
+			function getMessage(x){
+				var happiness = (x/1300)*100;
+				var sadness = 100 - happiness;
+				var coor = "Happiness: " + happiness.toFixed(2) + ", Sadness: " + sadness.toFixed(2);
+				var message;
+				
+				switch (true) {
+					case (happiness < 20):
+						message = "Critical Relation <br> <br> I am afriad your relationship has gone cold, you need to see us NOW ! ";
+						break;
+					case (happiness > 20 && happiness < 50):
+						message = "Lukewarm <br><br> Unhappy and undecided ? Read some stories";
+						break;
+					case (happiness > 50 && happiness < 80):
+						message = "Generally happy but with problem <br><br> Fix them";
+						break;
+					default:
+						message = "Relly happy stuff, just enjoy";
+						break;
+				}
+				
+				var string = coor + "<br> <br>" + message;
+				return string
+			}
+		</script>
+	</body>
+</html>
