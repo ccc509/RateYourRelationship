@@ -1,13 +1,18 @@
 function displayResult(event) {
-	var popup = document.getElementById("myPopup");
-	var x = event.clientX;
-	generateMessage(x);
-	popup.classList.toggle("show");
+	if(hasNotRated){
+		var popup = document.getElementById("myPopup");
+		var x = event.clientX;
+		generateMessage(x);
+		popup.classList.toggle("show");
+		hasNotRated = false;
+	}
 }
 
 function closePopup() {
 	location.reload();
 }
+
+var hasNotRated = true;
 
 function generateMessage(x){
 	var happiness = (x/1300)*100;

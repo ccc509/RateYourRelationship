@@ -38,23 +38,29 @@
 			$(window).on('resize', this.setDimensions.bind(this));
 		},
 		onTap: function(e){
+			if(hasNotRated){
 			e.preventDefault();
 
 			this.leftPos = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
 			this.requestDrag();
+			}
 		},
 		onDragStart: function(e){
-			e.preventDefault();
+			if(hasNotRated){
+				e.preventDefault();
 
-			var startX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
+				var startX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
 
-			this.posX = this.$dragElement.offset().left + this.dragWidth - startX;
-			this.isDragging = true;
+				this.posX = this.$dragElement.offset().left + this.dragWidth - startX;
+				this.isDragging = true;
+			}			
 		},
 		onDragEnd: function(e){
+			if(hasNotRated){
 			e.preventDefault();
 
 			this.isDragging = false;
+			}
 		},
 		onDrag: function(e){
 			e.preventDefault();
